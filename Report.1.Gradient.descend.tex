@@ -1,0 +1,242 @@
+\documentclass[hidelinks]{report}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{placeins}
+\usepackage{tikz}
+\usetikzlibrary{automata, arrows, positioning}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xcolor,graphicx}
+\setcounter{secnumdepth}{0}
+\usepackage{titlesec}
+\usepackage[left=1.5in,top=1in,bottom=1in,right=1in]{geometry}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{lipsum}
+\usepackage{fancyhdr}
+\usepackage{mathptmx}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\setcounter{tocdepth}{4}
+\usepackage{amsfonts}
+\usepackage{fvextra}
+
+
+\DefineVerbatimEnvironment{MyVerbatim}{Verbatim}{breaklines=true}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\newcommand{\mynote}[2]{\fbox{\bfseries\sffamily\scriptsize{#1}} {\small\textsf{\emph{#2}}}}
+
+\newcommand{\hieplnc}[1]{\textcolor{red}{\mynote{hieplnc}{#1}}}
+
+\newcommand{\sontg}[1]{\textcolor{blue}{\mynote{sontg}{#1}}}
+
+\definecolor{blue}{RGB}{31,56,100}
+
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+\makeatletter
+\def\@makechapterhead#1{%
+  {
+  \parindent \z@ \raggedright \normalfont   
+    
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \thechapter.\ % <-- Chapter # (without "Chapter")
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak% <------------------ Chapter title
+    \vskip 40\p@% <------------------ Space between chapter title and first paragraph
+  }}
+\makeatother
+
+
+% Redefine the \thesection and \thesubsection representations
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% Define a new counter for subsections
+\newcounter{subsecindex}[section]
+\renewcommand{\thesubsecindex}{\thesubsection%
+  \ifnum\value{subsecindex}>0
+    .\arabic{subsecindex}%
+  \fi
+}
+
+% Redefine the \section command to include the index
+\let\oldsection\section
+\renewcommand{\section}[1]{%
+  \setcounter{subsecindex}{0} % Reset subsection counter for each section
+  \refstepcounter{section}%
+  \oldsection{\thesection\hspace{0.5em}#1}%
+}
+
+% Redefine the \subsection command to include the index
+\let\oldsubsection\subsection
+\renewcommand{\subsection}[1]{%
+  \refstepcounter{subsection}%
+  \oldsubsection{\thesubsecindex\hspace{0.5em}#1}%
+}
+
+% Redefine the \subsubsection command to include the index
+\let\oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}[1]{%
+  \refstepcounter{subsubsection}%
+  \oldsubsubsection{\thesubsecindex\hspace{0.5em}#1}%
+}
+
+\titleformat{\section}
+  {\normalfont\LARGE\bfseries} % Adjust \Large to any size you prefer
+  {\thesection}{3em}{}
+\titleformat{\subsection}
+  {\normalfont\Large\bfseries} % Adjust \Large to any size you prefer
+  {\thesubsection}{3em}{}
+\titleformat{\subsubsection}
+  {\normalfont\Large\bfseries} % Adjust \Large to any size you prefer
+  {\thesubsubsection}{3em}{}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\pdfbookmark[0]{Main Title}{maintitle}
+\begin{titlepage}
+    \begin{tikzpicture}[remember picture,overlay,inner sep=0,outer sep=0]
+        \draw[black!70!black,line width=1.5pt]
+            ([xshift=-0.65in,yshift=-1cm]current page.north east) coordinate (A) -- % Adjusted x-shift and y-shift
+            ([xshift=0.65in,yshift=-1cm]current page.north west) coordinate (B) -- % Adjusted x-shift and y-shift
+            ([xshift=0.65in,yshift=1cm]current page.south west) coordinate (C) -- % Adjusted x-shift and y-shift
+            ([xshift=-0.65in,yshift=1cm]current page.south east) -- % Adjusted x-shift
+            cycle;
+    \end{tikzpicture}
+
+    \begin{center}
+    \begin{figure}
+        \centering
+        \huge \uppercase{university of science and technology of hanoi} \\ [1.5 cm]
+    
+        \filleft
+        \includegraphics[width=0.7\linewidth]{images/usth.png}
+    \end{figure}
+    
+    \textsc{\Large }\\[1cm]
+    {\huge \bfseries \uppercase{LABWORK'S REPORT}}\\[1cm]
+
+    {\large \bfseries 2440053 - Dao Xuan Quy  } \\ [0.5cm]
+    {\huge \bfseries \uppercase{Deep Learning}}\\[1cm]
+    
+    % Title
+    \rule{\linewidth}{0.3mm} \\[0.4cm]
+    { \Huge \bfseries\color{blue}  Labwork 1: Implement Gradient descend}
+    \rule{\linewidth}{0.3mm} \\[0.7cm]
+    
+    \large Academic Year: 2024-2026
+    \end{center}
+
+\end{titlepage}
+
+\newpage
+\pagenumbering{roman}
+\noindent \Large \tableofcontents
+
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+\thispagestyle{empty}
+\newpage
+
+\chapter{Introduction}
+\pagenumbering{arabic}
+
+\hspace{5mm} In this labwork I implement gradient descend algorithm for the function $f(x) = x^2, 
+ x_0 = 10, learning\_rate = 0.1$ from scratch and plot the results
+
+ 
+\chapter{Implementation}
+\noindent This is my implementation of gradient descend:
+
+\begin{verbatim}
+    def gradient_descend(x, lr):
+        threshold = 1
+        loss = []
+        xs = []
+        count = 0
+        while x > threshold:
+            count +=1
+            f_prime = 2*x
+            x = x - lr*f_prime  
+            f = x**2
+            loss.append(f)
+            xs.append(x)
+            
+            print(f"count: {count} x: {x} f(x): {f}")
+        return loss
+\end{verbatim}
+\chapter{Results}
+
+This is the output of the function with moderate learning rate. This balance the runtime and the stability of the function:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Time (iteration)} & \textbf{x} & \textbf{f(x)} \\ \midrule
+1  & 8.0                      & 64.0 \\
+2  & 6.4                      & 40.96000000000001 \\
+3  & 5.12                     & 26.2144 \\
+4  & 4.096                    & 16.777216 \\
+5  & 3.2768                   & 10.73741824 \\
+6  & 2.62144                  & 6.871947673600001 \\
+7  & 2.0971520000000003       & 4.398046511104002 \\
+8  & 1.6777216000000004       & 2.8147497671065613 \\
+9  & 1.3421772800000003       & 1.801439850948199 \\
+10 & 1.0737418240000003       & 1.1529215046068475 \\
+11 & 0.8589934592000003       & 0.7378697629483825 \\ \bottomrule
+\end{tabular}
+\caption{Gradient Descent Iterations}
+\end{table}
+Ploting the f(x) values
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{fig/loss.png}
+    \caption{f(x) values after 11 iteration}
+    \label{fig:enter-label}
+\end{figure}
+
+If the learning rate is set too small, the function is moving only a little bit after each iteration. Therefore, it took more time to finish the algorithm. In my case, it took 144 iterations to finish the algorithm when changing the \texttt{learning\_rate} from 0.1 to 0.01.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{fig/lr0.01.png}
+    \caption{f(x) values with lr = 0.01}
+    \label{fig:enter-label}
+\end{figure}
+
+On the other hand, if the learning rate is set too big, the f(x) values could diverse or oscillate or it could converge very fast resulting unstable performance. In my algorithm, if the learning rate is set to 0.4, the model converges after only two iterations.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{fig/lr=0.4.png}
+    \caption{f(x) values with lr = 0.4}
+    \label{fig:enter-label}
+\end{figure}
+
+\chapter{Conclusion}
+In this lab, I implemented the gradient descent algorithm to minimize the function $f(x) = x^2$. By experimenting with different learning rates,  we achieve different convergence behavior. A moderate learning rate such as 0.1 provided a good balance between speed and stability. A small learning rate led to slow convergence, while a large learning rate caused the algorithm to converge too quickly or behave unstably. 
+
+\end{document}
