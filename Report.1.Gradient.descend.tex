@@ -139,7 +139,7 @@
     
     % Title
     \rule{\linewidth}{0.3mm} \\[0.4cm]
-    { \Huge \bfseries\color{blue}  Labwork 1: Implement Gradient descend}
+    { \Huge \bfseries\color{blue}  Labwork 1: Implement Gradient Descend}
     \rule{\linewidth}{0.3mm} \\[0.7cm]
     
     \large Academic Year: 2024-2026
@@ -171,21 +171,24 @@
 \noindent This is my implementation of gradient descend:
 
 \begin{verbatim}
-    def gradient_descend(x, lr):
-        threshold = 1
-        loss = []
-        xs = []
-        count = 0
-        while x > threshold:
-            count +=1
-            f_prime = 2*x
-            x = x - lr*f_prime  
-            f = x**2
-            loss.append(f)
-            xs.append(x)
-            
-            print(f"count: {count} x: {x} f(x): {f}")
-        return loss
+   def gradient_descend(x, lr):
+    big = 1
+    loss = []
+    xs = []
+    old_f = None
+    count = 0
+    while True:
+        f_prime = 2*x
+        x = x - lr*f_prime  
+        f = x**2
+        loss.append(f)
+        xs.append(x)
+        print(f"time: {count} x: {x} f(x): {f}")
+        if old_f is not None and abs(f-old_f) < big:       
+            break
+        old_f = f
+        count += 1    
+    return loss
 \end{verbatim}
 \chapter{Results}
 
@@ -237,6 +240,6 @@ On the other hand, if the learning rate is set too big, the f(x) values could di
 \end{figure}
 
 \chapter{Conclusion}
-In this lab, I implemented the gradient descent algorithm to minimize the function $f(x) = x^2$. By experimenting with different learning rates,  we achieve different convergence behavior. A moderate learning rate such as 0.1 provided a good balance between speed and stability. A small learning rate led to slow convergence, while a large learning rate caused the algorithm to converge too quickly or behave unstably. 
+In this lab, I implemented the gradient descent algorithm to minimize the function $f(x) = x^2$. By experimenting with different learning rates,  we achieve different convergence behavior. A moderate learning rate such as 0.1 provided a good balance between speed and stability. A small learning rate led to slow convergence, while a large learning rate caused the algorithm to converge too quickly or behave unstably. This highlights the importance of tuning the learning rate to ensure efficient and stable optimization.
 
 \end{document}
