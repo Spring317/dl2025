@@ -62,7 +62,7 @@ class Network:
         return weights
     
     def forward(self, input_data):
-        """Perform forward propagation through the network
+        """Perform feed forward through the network
         
         Parameters:
         input_data: Input features
