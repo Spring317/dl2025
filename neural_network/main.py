@@ -57,6 +57,7 @@ def plot_results(actual, predicted):
     plt.scatter(range(len(actual)), [y[0] for y in actual], color='blue', label='Actual')
     plt.scatter(range(len(predicted)), [y[0] for y in predicted], color='red', label='Predicted')
     plt.xlabel('Sample Index')
+    
     plt.ylabel('Value')
     plt.title('Actual vs Predicted Values')
     plt.legend()
