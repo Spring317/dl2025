@@ -1,6 +1,6 @@
 from Network import Network
-import numpy as np
-import os
+# import numpy as np
+# import os
 
 
 import matplotlib.pyplot as plt
@@ -10,22 +10,22 @@ def main():
     bias = 1
     learning_rate = 0.01
     iterations = 1000
-    config_path = os.path.join(os.path.dirname(__file__), 'config.txt')
+    config_path = 'config.txt'
     
     # Sample data for XOR problem
-    x_data = np.array([
+    x_data = [
         [0, 0, 1],  
         [0, 1, 1],
         [1, 0, 1],
         [1, 1, 1]
-    ])
+    ]
     
-    y_data = np.array([
+    y_data = [
         [0],  
         [1],
         [1],
         [0]
-    ])
+    ]
     
     # Initialize network with None for weights (will be initialized by the network)
     network = Network(
