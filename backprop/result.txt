@@ -1,0 +1,4 @@
+Input: [0, 0], Expected: 0, Predicted: 0.0082
+Input: [0, 1], Expected: 1, Predicted: 0.9889
+Input: [1, 0], Expected: 1, Predicted: 0.9899
+Input: [1, 1], Expected: 0, Predicted: 0.0104
