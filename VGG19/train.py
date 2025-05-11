@@ -127,11 +127,11 @@ def plot_training_history(history):
     plt.title('Accuracy')
     
     plt.savefig('training_history.png')
-    plt.show()
+    #plt.show()
 
 def main():
     # Set device
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
     # Prepare data
