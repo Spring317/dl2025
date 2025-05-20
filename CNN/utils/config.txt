@@ -1,0 +1,11 @@
+input_width=28
+input_height=28
+input_channels=1
+conv1_filters=4
+conv1_kernel_size=3
+conv2_filters=4
+conv2_kernel_size=3
+pool_size=2
+dense_units=10
+activation=relu
+output_activation=softmax
